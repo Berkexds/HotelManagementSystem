@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cf601522b1c0456a86f649c058bb869a" Name="Diagram1" ZoomLevel="69">
+        <EntityTypeShape EntityType="HotelManagementSystemModel1.Feedback" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelManagementSystemModel1.Payment" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelManagementSystemModel1.Reservation" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelManagementSystemModel1.Room" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="HotelManagementSystemModel1.FK__Feedback__Reserv__208CD6FA" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelManagementSystemModel1.FK__Reservati__Payme__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelManagementSystemModel1.FK__Reservati__RoomI__1CBC4616" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HotelManagementSystemModel1.Customer" Width="1.5" PointX="0.75" PointY="1.375" />
+        <AssociationConnector Association="HotelManagementSystemModel1.FK__Payment__Custome__18EBB532" />
+        <AssociationConnector Association="HotelManagementSystemModel1.FK__Reservati__Custo__1DB06A4F" />
+        <EntityTypeShape EntityType="HotelManagementSystemModel1.Employee" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="HotelManagementSystemModel1.FK__Employee__Manage__160F4887" />
+        <AssociationConnector Association="HotelManagementSystemModel1.HasAccess" />
+        <AssociationConnector Association="HotelManagementSystemModel1.Organize" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

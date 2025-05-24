@@ -1,0 +1,589 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HotelManagementSystemModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="Salary" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="DateOfHiring" Type="date" />
+          <Property Name="WorkingHours" Type="varchar" MaxLength="50" />
+          <Property Name="ManagerID" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="ReservationID" />
+          </Key>
+          <Property Name="ReservationID" Type="int" Nullable="false" />
+          <Property Name="DateOfFeedback" Type="date" />
+          <Property Name="AnonymityStatus" Type="bit" />
+          <Property Name="ManagementResponse" Type="text" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Comments" Type="text" />
+        </EntityType>
+        <EntityType Name="HasAccess">
+          <Key>
+            <PropertyRef Name="RoomID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="RoomID" Type="int" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Organize">
+          <Key>
+            <PropertyRef Name="ReservationID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="ReservationID" Type="int" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" Nullable="false" />
+          <Property Name="PaymentMethod" Type="varchar" MaxLength="50" />
+          <Property Name="PaymentStatus" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PaymentDate" Type="date" />
+          <Property Name="CustomerID" Type="int" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReservationID" />
+          </Key>
+          <Property Name="ReservationID" Type="int" Nullable="false" />
+          <Property Name="ReservationStatus" Type="varchar" MaxLength="50" />
+          <Property Name="NumberOfPeople" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="PaymentID" Type="int" />
+          <Property Name="RoomID" Type="int" />
+          <Property Name="CustomerID" Type="int" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="int" Nullable="false" />
+          <Property Name="RoomStatus" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="text" />
+          <Property Name="PricePerNight" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="RoomType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Employee__Manage__160F4887">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__Reserv__208CD6FA">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="ReservationID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="ReservationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HasAccess__Emplo__282DF8C2">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="HasAccess" Type="Self.HasAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="HasAccess">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HasAccess__RoomI__2739D489">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="HasAccess" Type="Self.HasAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="HasAccess">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organize__Employ__245D67DE">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Organize" Type="Self.Organize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Organize">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organize__Reserv__236943A5">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1" />
+          <End Role="Organize" Type="Self.Organize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="ReservationID" />
+            </Principal>
+            <Dependent Role="Organize">
+              <PropertyRef Name="ReservationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__Custome__18EBB532">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__Custo__1DB06A4F">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__Payme__1BC821DD">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__RoomI__1CBC4616">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelManagementSystemModel1StoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HasAccess" EntityType="Self.HasAccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organize" EntityType="Self.Organize" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Employee__Manage__160F4887" Association="Self.FK__Employee__Manage__160F4887">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__Reserv__208CD6FA" Association="Self.FK__Feedback__Reserv__208CD6FA">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HasAccess__Emplo__282DF8C2" Association="Self.FK__HasAccess__Emplo__282DF8C2">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="HasAccess" EntitySet="HasAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HasAccess__RoomI__2739D489" Association="Self.FK__HasAccess__RoomI__2739D489">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="HasAccess" EntitySet="HasAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organize__Employ__245D67DE" Association="Self.FK__Organize__Employ__245D67DE">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Organize" EntitySet="Organize" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organize__Reserv__236943A5" Association="Self.FK__Organize__Reserv__236943A5">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Organize" EntitySet="Organize" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__Custome__18EBB532" Association="Self.FK__Payment__Custome__18EBB532">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__Custo__1DB06A4F" Association="Self.FK__Reservati__Custo__1DB06A4F">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__Payme__1BC821DD" Association="Self.FK__Reservati__Payme__1BC821DD">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__RoomI__1CBC4616" Association="Self.FK__Reservati__RoomI__1CBC4616">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelManagementSystemModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="ReservationID" />
+          </Key>
+          <Property Name="ReservationID" Type="Int32" Nullable="false" />
+          <Property Name="DateOfFeedback" Type="DateTime" Precision="0" />
+          <Property Name="AnonymityStatus" Type="Boolean" />
+          <Property Name="ManagementResponse" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK__Feedback__Reserv__208CD6FA" FromRole="Feedback" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="0" />
+          <Property Name="CustomerID" Type="Int32" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__Payme__1BC821DD" FromRole="Payment" ToRole="Reservation" />
+          <NavigationProperty Name="Customer" Relationship="HotelManagementSystemModel1.FK__Payment__Custome__18EBB532" FromRole="Payment" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReservationID" />
+          </Key>
+          <Property Name="ReservationID" Type="Int32" Nullable="false" />
+          <Property Name="ReservationStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumberOfPeople" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="PaymentID" Type="Int32" />
+          <Property Name="RoomID" Type="Int32" />
+          <Property Name="CustomerID" Type="Int32" />
+          <NavigationProperty Name="Feedback" Relationship="Self.FK__Feedback__Reserv__208CD6FA" FromRole="Reservation" ToRole="Feedback" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK__Reservati__Payme__1BC821DD" FromRole="Reservation" ToRole="Payment" />
+          <NavigationProperty Name="Room" Relationship="Self.FK__Reservati__RoomI__1CBC4616" FromRole="Reservation" ToRole="Room" />
+          <NavigationProperty Name="Customer" Relationship="HotelManagementSystemModel1.FK__Reservati__Custo__1DB06A4F" FromRole="Reservation" ToRole="Customer" />
+          <NavigationProperty Name="Employees" Relationship="HotelManagementSystemModel1.Organize" FromRole="Reservation" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="Int32" Nullable="false" />
+          <Property Name="RoomStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PricePerNight" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="RoomType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__RoomI__1CBC4616" FromRole="Room" ToRole="Reservation" />
+          <NavigationProperty Name="Employees" Relationship="HotelManagementSystemModel1.HasAccess" FromRole="Room" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK__Feedback__Reserv__208CD6FA">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="ReservationID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="ReservationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__Payme__1BC821DD">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__RoomI__1CBC4616">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelManagementSystemEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <AssociationSet Name="FK__Feedback__Reserv__208CD6FA" Association="Self.FK__Feedback__Reserv__208CD6FA">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__Payme__1BC821DD" Association="Self.FK__Reservati__Payme__1BC821DD">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__RoomI__1CBC4616" Association="Self.FK__Reservati__RoomI__1CBC4616">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <EntitySet Name="Customers" EntityType="HotelManagementSystemModel1.Customer" />
+          <AssociationSet Name="FK__Payment__Custome__18EBB532" Association="HotelManagementSystemModel1.FK__Payment__Custome__18EBB532">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__Custo__1DB06A4F" Association="HotelManagementSystemModel1.FK__Reservati__Custo__1DB06A4F">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <EntitySet Name="Employees" EntityType="HotelManagementSystemModel1.Employee" />
+          <AssociationSet Name="FK__Employee__Manage__160F4887" Association="HotelManagementSystemModel1.FK__Employee__Manage__160F4887">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Employee1" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="HasAccess" Association="HotelManagementSystemModel1.HasAccess">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Room" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="Organize" Association="HotelManagementSystemModel1.Organize">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Payments" Relationship="HotelManagementSystemModel1.FK__Payment__Custome__18EBB532" FromRole="Customer" ToRole="Payment" />
+          <NavigationProperty Name="Reservations" Relationship="HotelManagementSystemModel1.FK__Reservati__Custo__1DB06A4F" FromRole="Customer" ToRole="Reservation" />
+        </EntityType>
+        <Association Name="FK__Payment__Custome__18EBB532">
+          <End Type="HotelManagementSystemModel1.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="HotelManagementSystemModel1.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__Custo__1DB06A4F">
+          <End Type="HotelManagementSystemModel1.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="HotelManagementSystemModel1.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="DateOfHiring" Type="DateTime" Precision="0" />
+          <Property Name="WorkingHours" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ManagerID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee1" Relationship="HotelManagementSystemModel1.FK__Employee__Manage__160F4887" FromRole="Employee" ToRole="Employee1" />
+          <NavigationProperty Name="Employee2" Relationship="HotelManagementSystemModel1.FK__Employee__Manage__160F4887" FromRole="Employee1" ToRole="Employee" />
+          <NavigationProperty Name="Rooms" Relationship="HotelManagementSystemModel1.HasAccess" FromRole="Employee" ToRole="Room" />
+          <NavigationProperty Name="Reservations" Relationship="HotelManagementSystemModel1.Organize" FromRole="Employee" ToRole="Reservation" />
+        </EntityType>
+        <Association Name="FK__Employee__Manage__160F4887">
+          <End Type="HotelManagementSystemModel1.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="HotelManagementSystemModel1.Employee" Role="Employee1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HasAccess">
+          <End Type="HotelManagementSystemModel1.Employee" Role="Employee" Multiplicity="*" />
+          <End Type="HotelManagementSystemModel1.Room" Role="Room" Multiplicity="*" />
+        </Association>
+        <Association Name="Organize">
+          <End Type="HotelManagementSystemModel1.Employee" Role="Employee" Multiplicity="*" />
+          <End Type="HotelManagementSystemModel1.Reservation" Role="Reservation" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HotelManagementSystemModel1StoreContainer" CdmEntityContainer="HotelManagementSystemEntities1">
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="HotelManagementSystemModel1.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="ReservationID" ColumnName="ReservationID" />
+                <ScalarProperty Name="DateOfFeedback" ColumnName="DateOfFeedback" />
+                <ScalarProperty Name="AnonymityStatus" ColumnName="AnonymityStatus" />
+                <ScalarProperty Name="ManagementResponse" ColumnName="ManagementResponse" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="HotelManagementSystemModel1.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="HotelManagementSystemModel1.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="ReservationID" ColumnName="ReservationID" />
+                <ScalarProperty Name="ReservationStatus" ColumnName="ReservationStatus" />
+                <ScalarProperty Name="NumberOfPeople" ColumnName="NumberOfPeople" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="HotelManagementSystemModel1.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="RoomStatus" ColumnName="RoomStatus" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PricePerNight" ColumnName="PricePerNight" />
+                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="HotelManagementSystemModel1.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="HotelManagementSystemModel1.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+                <ScalarProperty Name="DateOfHiring" ColumnName="DateOfHiring" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="HasAccess" TypeName="HotelManagementSystemModel1.HasAccess" StoreEntitySet="HasAccess">
+            <EndProperty Name="Room">
+              <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+            </EndProperty>
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Organize" TypeName="HotelManagementSystemModel1.Organize" StoreEntitySet="Organize">
+            <EndProperty Name="Reservation">
+              <ScalarProperty Name="ReservationID" ColumnName="ReservationID" />
+            </EndProperty>
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
