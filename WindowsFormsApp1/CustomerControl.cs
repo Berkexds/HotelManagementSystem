@@ -8,14 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApp1
 {
     public partial class CustomerControl : UserControl
     {
-        public CustomerControl()
+
+        private string userTitle;
+        public CustomerControl(string title)
         {
             InitializeComponent();
+            userTitle = title;
             LoadCustomerData();
 
             dgvCustomers.ColumnHeaderMouseClick += dgvCustomers_ColumnHeaderMouseClick;
@@ -118,7 +122,7 @@ namespace WindowsFormsApp1
             }
             else if (columnName == "Details")
             {
-                MessageBox.Show($"View details of Customer #{customerId}");
+                //MessageBox.Show($"View details of Customer #{customerId}");
                 // Show a details form, modal, etc.
             }
             else if (columnName == "Delete")
@@ -161,10 +165,11 @@ namespace WindowsFormsApp1
                         c.Gender
                     }).ToList();
 
+                dgvCustomers.Columns.Clear(); // important: reset columns
                 dgvCustomers.DataSource = data;
 
                 // Add buttons only once
-                if (!dgvCustomers.Columns.Contains("Edit"))
+                if (userTitle == "Manager")
                 {
                     dgvCustomers.Columns.Add(new DataGridViewButtonColumn
                     {
@@ -174,13 +179,7 @@ namespace WindowsFormsApp1
                         UseColumnTextForButtonValue = true
                     });
 
-                    dgvCustomers.Columns.Add(new DataGridViewButtonColumn
-                    {
-                        HeaderText = "",
-                        Name = "Details",
-                        Text = "Details",
-                        UseColumnTextForButtonValue = true
-                    });
+                
 
                     dgvCustomers.Columns.Add(new DataGridViewButtonColumn
                     {

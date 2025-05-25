@@ -8,16 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApp1
 {
     public partial class ReservationControl : UserControl
     {
-        public ReservationControl()
+        private string userTitle;
+        public ReservationControl(string title)
         {
             InitializeComponent();
-            LoadReservationData(); // Call the method on load
+            userTitle = title;
             dgvReservation.CellContentClick += dgvReservation_CellContentClick;
+            LoadReservationData();
+           
         }
 
         private void LoadReservationData()
@@ -36,28 +40,34 @@ namespace WindowsFormsApp1
                 dgvReservation.Columns.Clear();
                 dgvReservation.DataSource = data;
 
-                dgvReservation.Columns.Add(new DataGridViewButtonColumn
-                {
-                    Name = "Details",
-                    Text = "Details",
-                    UseColumnTextForButtonValue = true
-                });
 
-                dgvReservation.Columns.Add(new DataGridViewButtonColumn
+                if (userTitle == "Manager")
                 {
-                    Name = "Edit",
-                    Text = "Edit",
-                    UseColumnTextForButtonValue = true
-                });
+                    dgvReservation.Columns.Add(new DataGridViewButtonColumn
+                    {
+                        Name = "Edit",
+                        Text = "Edit",
+                        UseColumnTextForButtonValue = true
+                    });
 
-                dgvReservation.Columns.Add(new DataGridViewButtonColumn
-                {
-                    Name = "Delete",
-                    Text = "Delete",
-                    UseColumnTextForButtonValue = true
-                });
+                    dgvReservation.Columns.Add(new DataGridViewButtonColumn
+                    {
+                        Name = "Details",
+                        Text = "Details",
+                        UseColumnTextForButtonValue = true
+                    });
+
+                    dgvReservation.Columns.Add(new DataGridViewButtonColumn
+                    {
+                        Name = "Delete",
+                        Text = "Delete",
+                        UseColumnTextForButtonValue = true
+                    });
+                }
             }
         }
+
+
         private bool detailsFormOpen = false;
         private void dgvReservation_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

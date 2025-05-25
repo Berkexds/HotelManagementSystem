@@ -8,14 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApp1
 {
     public partial class RoomControl : UserControl
     {
-        public RoomControl()
+        private string userTitle;
+        public RoomControl(string title)
         {
             InitializeComponent();
+            userTitle = title;
+            dgvRoom.CellContentClick += dgvRoom_CellContentClick;
             LoadRoomData();
 
             this.dgvRoom.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRoom_ColumnHeaderMouseClick);
@@ -110,8 +114,9 @@ namespace WindowsFormsApp1
                     })
                     .ToList();
 
+                dgvRoom.Columns.Clear(); // 🧼 Reset first
                 dgvRoom.DataSource = data;
-                if (!dgvRoom.Columns.Contains("Edit"))
+                if (userTitle == "Manager")
                 {
                     dgvRoom.Columns.Add(new DataGridViewButtonColumn
                     {
