@@ -17,6 +17,82 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             LoadRoomData();
+
+            this.dgvRoom.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRoom_ColumnHeaderMouseClick);
+        }
+
+        private void dgvRoom_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            String columnName = dgvRoom.Columns[e.ColumnIndex].Name;
+
+
+            using (var db = new HotelManagementSystemEntities1())
+            {
+                switch (columnName)
+                {
+                    case "RoomStatus":
+                        dgvRoom.DataSource = db.Rooms
+                        .OrderBy(x => x.RoomStatus)
+                        .Select(x => new
+                        {
+                            x.RoomID,
+                            x.RoomStatus,
+                            x.Description,
+                            x.PricePerNight,
+                            x.RoomType,
+                        }).ToList();
+                        break;
+                    case "Description":
+                        dgvRoom.DataSource = db.Rooms
+                        .OrderBy(x => x.Description)
+                        .Select(x => new
+                        {
+                            x.RoomID,
+                            x.RoomStatus,
+                            x.Description,
+                            x.PricePerNight,
+                            x.RoomType,
+                        }).ToList();
+                        break;
+                    case "PricePerNight":
+                        dgvRoom.DataSource = db.Rooms
+                        .OrderBy(x => x.PricePerNight)
+                        .Select(x => new
+                        {
+                            x.RoomID,
+                            x.RoomStatus,
+                            x.Description,
+                            x.PricePerNight,
+                            x.RoomType,
+                        }).ToList();
+                        break;
+                    case "RoomType":
+                        dgvRoom.DataSource = db.Rooms
+                        .OrderBy(x => x.RoomType)
+                        .Select(x => new
+                        {
+                            x.RoomID,
+                            x.RoomStatus,
+                            x.Description,
+                            x.PricePerNight,
+                            x.RoomType,
+                        }).ToList();
+                        break;
+                    default:
+                        dgvRoom.DataSource = db.Rooms
+                        .OrderBy(x => x.RoomID)
+                        .Select(x => new
+                        {
+                            x.RoomID,
+                            x.RoomStatus,
+                            x.Description,
+                            x.PricePerNight,
+                            x.RoomType,
+                        }).ToList();
+                        break;
+
+                }
+            }
         }
 
         private void LoadRoomData()

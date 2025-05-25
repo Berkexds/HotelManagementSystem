@@ -17,8 +17,101 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             LoadEmployeeData();
+
+            this.dgvEmployee.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvEmployee_ColumnHeaderMouseClick);
         }
 
+        private void dgvEmployee_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            String columnName = dgvEmployee.Columns[e.ColumnIndex].Name;
+
+
+            using (var db = new HotelManagementSystemEntities1())
+            {
+                switch (columnName)
+                {
+                    case "Name":
+                        dgvEmployee.DataSource = db.Employees
+                        .OrderBy(x => x.Name)
+                        .Select(x => new
+                        {
+                            x.EmployeeID,
+                            x.Name,
+                            x.Title,
+                            x.Salary,
+                            x.DateOfHiring,
+                            x.WorkingHours
+                        }).ToList();
+                        break;
+                    case "Title":
+                        dgvEmployee.DataSource = db.Employees
+                        .OrderBy(x => x.Title)
+                        .Select(x => new
+                        {
+                            x.EmployeeID,
+                            x.Name,
+                            x.Title,
+                            x.Salary,
+                            x.DateOfHiring,
+                            x.WorkingHours
+                        }).ToList();
+                        break;
+                    case "Salary":
+                        dgvEmployee.DataSource = db.Employees
+                        .OrderBy(x => x.Salary)
+                        .Select(x => new
+                        {
+                            x.EmployeeID,
+                            x.Name,
+                            x.Title,
+                            x.Salary,
+                            x.DateOfHiring,
+                            x.WorkingHours
+                        }).ToList();
+                        break;
+                    case "DateOfHiring":
+                        dgvEmployee.DataSource = db.Employees
+                        .OrderBy(x => x.DateOfHiring)
+                        .Select(x => new
+                        {
+                            x.EmployeeID,
+                            x.Name,
+                            x.Title,
+                            x.Salary,
+                            x.DateOfHiring,
+                            x.WorkingHours
+                        }).ToList();
+                        break;
+                    case "WorkingHours":
+                        dgvEmployee.DataSource = db.Employees
+                        .OrderBy(x => x.WorkingHours)
+                        .Select(x => new
+                        {
+                            x.EmployeeID,
+                            x.Name,
+                            x.Title,
+                            x.Salary,
+                            x.DateOfHiring,
+                            x.WorkingHours
+                        }).ToList();
+                        break;
+                    default:
+                        dgvEmployee.DataSource = db.Employees
+                        .OrderBy(x => x.EmployeeID)
+                        .Select(x => new
+                        {
+                            x.EmployeeID,
+                            x.Name,
+                            x.Title,
+                            x.Salary,
+                            x.DateOfHiring,
+                            x.WorkingHours
+                        }).ToList();
+                        break;
+
+                }
+            }
+        }
 
         private void LoadEmployeeData()
         {

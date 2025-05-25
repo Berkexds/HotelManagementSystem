@@ -17,7 +17,90 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             LoadCustomerData();
+
+            dgvCustomers.ColumnHeaderMouseClick += dgvCustomers_ColumnHeaderMouseClick;
         }
+
+        private void dgvCustomers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            String columnName = dgvCustomers.Columns[e.ColumnIndex].Name;
+
+
+            using (var db = new HotelManagementSystemEntities1())
+            {
+                switch (columnName)
+                {
+                    case "Name":
+                        dgvCustomers.DataSource = db.Customers
+                        .OrderBy(x => x.Name)
+                        .Select(x => new
+                        {
+                        x.CustomerID,
+                        x.Name,
+                        x.EmailAddress,
+                        x.Phone,
+                        x.Gender,
+                        x.DateOfBirth
+                        }).ToList();
+                        break;
+                    case "EmailAddress":
+                        dgvCustomers.DataSource = db.Customers
+                        .OrderBy(x => x.EmailAddress)
+                        .Select(x => new
+                        {
+                            x.CustomerID,
+                            x.Name,
+                            x.EmailAddress,
+                            x.Phone,
+                            x.Gender,
+                            x.DateOfBirth
+                        }).ToList();
+                        break;
+                    case "Phone":
+                        dgvCustomers.DataSource = db.Customers
+                        .OrderBy(x => x.Phone)
+                        .Select(x => new
+                        {
+                            x.CustomerID,
+                            x.Name,
+                            x.EmailAddress,
+                            x.Phone,
+                            x.Gender,
+                            x.DateOfBirth
+                        }).ToList();
+                        break; 
+                    case "Gender":
+                        dgvCustomers.DataSource = db.Customers
+                        .OrderBy(x => x.Gender)
+                        .Select(x => new
+                        {
+                            x.CustomerID,
+                            x.Name,
+                            x.EmailAddress,
+                            x.Phone,
+                            x.Gender,
+                            x.DateOfBirth
+                        }).ToList();
+                        break;
+                    default:
+                        dgvCustomers.DataSource = db.Customers
+                        .OrderBy(x => x.CustomerID)
+                        .Select(x => new
+                        {
+                            x.CustomerID,
+                            x.Name,
+                            x.EmailAddress,
+                            x.Phone,
+                            x.Gender,
+                            x.DateOfBirth
+                        }).ToList();
+                        break;
+                }
+            }
+
+        }
+
+
         private void dgvCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
@@ -62,7 +145,9 @@ namespace WindowsFormsApp1
         }
 
 
-                    private void LoadCustomerData()
+
+
+        private void LoadCustomerData()
         {
             using (var db = new HotelManagementSystemEntities1())
             {
@@ -70,7 +155,7 @@ namespace WindowsFormsApp1
                     .Select(c => new
                     {
                         c.CustomerID,
-                        c.Name,  
+                        c.Name,
                         c.EmailAddress,
                         c.Phone,
                         c.Gender
@@ -107,8 +192,9 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
     }
 }
 
-    
+
 
