@@ -19,6 +19,7 @@ namespace WindowsFormsApp1
             LoadEmployeeData();
 
             this.dgvEmployee.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvEmployee_ColumnHeaderMouseClick);
+            this.textBox1.TextChanged += textBox1_TextChanged;
         }
 
         private void dgvEmployee_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -110,6 +111,7 @@ namespace WindowsFormsApp1
                         break;
 
                 }
+                tableLayoutPanel1.Controls.Add(dgvEmployee, 0, 1);
             }
         }
 
@@ -151,7 +153,35 @@ namespace WindowsFormsApp1
                     UseColumnTextForButtonValue = true
                 });
             }
+            tableLayoutPanel1.Controls.Add(dgvEmployee, 0, 1);
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            var query = textBox1.Text.ToLower();
+
+            using (var db = new HotelManagementSystemEntities1())
+            {
+                var result = db.Employees.Where(emp =>
+                emp.Name.ToLower().Contains(query) ||
+                emp.Title.ToLower().Contains(query) ||
+                emp.Salary.ToString().Contains(query) ||
+                emp.WorkingHours.ToLower().Contains(query) ||
+                emp.DateOfHiring.ToString().Contains(query))
+                .Select(x => new
+                {
+                    x.EmployeeID,
+                    x.Name,
+                    x.Title,
+                    x.Salary,
+                    x.DateOfHiring,
+                    x.WorkingHours
+                }).ToList();
+
+                dgvEmployee.DataSource = result;
+            }
+        }
+
 
         private void dgvEmployee_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
