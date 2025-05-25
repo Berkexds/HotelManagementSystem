@@ -34,26 +34,34 @@ namespace WindowsFormsApp1
             string inputName = txtName.Text.Trim();
             string inputPassword = txtPassword.Text.Trim();
 
+          
+
             using (var db = new HotelManagementSystemEntities1()) // make sure this matches your context
             {
+
+
+
                 var employee = db.Employees
-                                 .FirstOrDefault(emp => emp.Name == inputName && emp.Password == inputPassword);
+        .AsEnumerable()
+        .FirstOrDefault(emp =>
+            emp.Name.Trim().Equals(inputName, StringComparison.InvariantCultureIgnoreCase) &&
+            emp.Password.Trim() == inputPassword);
 
                 if (employee != null)
                 {
                     if (employee.Title == "Manager")
                     {
                         MessageBox.Show("Manager login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Form1 managerForm = new Form1();
+                        Form1 managerForm = new Form1(employee.Title);
                         managerForm.Show();
                         this.Hide();
                     }
                     else
                     {
-                       // MessageBox.Show("Employee login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        //Form2 employeeForm = new Form2();
-                       // employeeForm.Show();
-                        //this.Hide();
+                       MessageBox.Show("Employee login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Form1 employeeForm = new Form1(employee.Title);
+                        employeeForm.Show();
+                        this.Hide();
                     }
                 }
                 else

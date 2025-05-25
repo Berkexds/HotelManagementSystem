@@ -8,14 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        private string userTitle;
+        public Form1(string title)
         {
             InitializeComponent();
+            userTitle = title;
             this.Load += Form1_Load;
         }
 
@@ -40,18 +43,26 @@ namespace WindowsFormsApp1
                 int femaleCount = db.Customers.Count(c => c.Gender == "Female");
 
                 chart1.Series.Clear();
+                chart1.Titles.Clear(); // In case it's loaded multiple times
                 chart1.Titles.Add("Gender Distribution");
+                
 
                 var series = new System.Windows.Forms.DataVisualization.Charting.Series
                 {
                     Name = "Gender",
                     ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
 
+
                 };
+               
+
                 series.IsValueShownAsLabel = true;
-                chart1.Series.Add(series);
+
                 series.Points.AddXY($"Male: {maleCount}", maleCount);
                 series.Points.AddXY($"Female: {femaleCount}", femaleCount);
+                chart1.Series.Add(series);
+                CustomizeBasedOnRole();
+
             }
         }
         private void ShowPanel(Panel panelToShow)
@@ -64,6 +75,19 @@ namespace WindowsFormsApp1
             {
                 panelToShow.Visible = true;
                 panelToShow.BringToFront();
+            }
+        }
+
+        private void CustomizeBasedOnRole()
+        {
+            if (userTitle != "Manager")
+            {
+                // ❌ Hide Employees tab entirely
+                btnEmployees.Visible = true;
+                btnEmployees.Enabled = true;
+
+
+
             }
         }
 
@@ -87,7 +111,7 @@ namespace WindowsFormsApp1
         {
             ShowPanel(null);                    // Hide panelHome
             panelContent.Controls.Clear();
-            var customerControl = new CustomerControl();
+            var customerControl = new CustomerControl(userTitle);
             customerControl.Dock = DockStyle.Fill;
             panelContent.Controls.Add(customerControl);
         }
@@ -96,13 +120,21 @@ namespace WindowsFormsApp1
         {
             ShowPanel(null);
             panelContent.Controls.Clear();
-            var roomControl = new RoomControl();
+            var roomControl = new RoomControl(userTitle);
             roomControl.Dock = DockStyle.Fill;
             panelContent.Controls.Add(roomControl);
         }
 
         private void btnEmployees_Click(object sender, EventArgs e)
         {
+            if (userTitle != "Manager")
+            {
+                MessageBox.Show("You do not have permission to access the Employees section.",
+                                "Access Denied",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return; // ✅ block access
+            }
             ShowPanel(null);
             panelContent.Controls.Clear();
             var employeeControl = new EmployeeControl();
@@ -114,7 +146,7 @@ namespace WindowsFormsApp1
         {
             ShowPanel(null);
             panelContent.Controls.Clear();
-            var reservationControl = new ReservationControl();
+            var reservationControl = new ReservationControl(userTitle);
             reservationControl.Dock = DockStyle.Fill;
             panelContent.Controls.Add(reservationControl);
         }
