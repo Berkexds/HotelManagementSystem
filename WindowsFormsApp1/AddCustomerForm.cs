@@ -29,14 +29,12 @@ namespace WindowsFormsApp1
             string gender = comboBox1.SelectedItem?.ToString();
             DateTime dateOfBirth = dateTimePicker1.Value;
 
-            // ID pozitif mi?
             if (customerId <= 0)
             {
                 MessageBox.Show("Customer ID pozitif bir sayı olmalıdır.", "Geçersiz ID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Required alanlar kontrolü
             if (string.IsNullOrWhiteSpace(name))
             {
                 MessageBox.Show("İsim boş bırakılamaz.", "Eksik Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -61,7 +59,6 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            // Doğum tarihi gelecekte olamaz
             if (dateOfBirth > DateTime.Today)
             {
                 MessageBox.Show("Doğum tarihi bugünden sonra olamaz.", "Geçersiz Tarih", MessageBoxButtons.OK, MessageBoxIcon.Warning);
