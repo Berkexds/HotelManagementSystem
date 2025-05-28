@@ -63,6 +63,12 @@
     <Compile Include="AddCustomerForm.Designer.cs">
       <DependentUpon>AddCustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddReservationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddReservationForm.Designer.cs">
+      <DependentUpon>AddReservationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddRoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +145,9 @@
     </Compile>
     <EmbeddedResource Include="AddCustomerForm.resx">
       <DependentUpon>AddCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddReservationForm.resx">
+      <DependentUpon>AddReservationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddRoomForm.resx">
       <DependentUpon>AddRoomForm.cs</DependentUpon>

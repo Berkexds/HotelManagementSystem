@@ -47,6 +47,11 @@
             // numericUpDown3
             // 
             this.numericUpDown3.Location = new System.Drawing.Point(221, 88);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(120, 22);
             this.numericUpDown3.TabIndex = 12;
