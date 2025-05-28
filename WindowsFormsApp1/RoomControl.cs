@@ -202,7 +202,7 @@ namespace WindowsFormsApp1
 
         private void addRoomButton_Click(object sender, EventArgs e)
         {
-            AddEntityForm addRoomForm = new AddEntityForm(typeof(Room));
+            AddRoomForm addRoomForm = new AddRoomForm();
             addRoomForm.ShowDialog();
         }
     }

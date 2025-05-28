@@ -57,11 +57,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddEntityForm.cs">
+    <Compile Include="AddCustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEntityForm.Designer.cs">
-      <DependentUpon>AddEntityForm.cs</DependentUpon>
+    <Compile Include="AddCustomerForm.Designer.cs">
+      <DependentUpon>AddCustomerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddRoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddRoomForm.Designer.cs">
+      <DependentUpon>AddRoomForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomerControl.cs">
       <SubType>UserControl</SubType>
@@ -131,6 +137,12 @@
     <Compile Include="RoomControl.Designer.cs">
       <DependentUpon>RoomControl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddCustomerForm.resx">
+      <DependentUpon>AddCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddRoomForm.resx">
+      <DependentUpon>AddRoomForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomerControl.resx">
       <DependentUpon>CustomerControl.cs</DependentUpon>
     </EmbeddedResource>
