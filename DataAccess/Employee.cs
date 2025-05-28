@@ -11,7 +11,8 @@ namespace DataAccess
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,13 +22,18 @@ namespace DataAccess
             this.Rooms = new HashSet<Room>();
             this.Reservations = new HashSet<Reservation>();
         }
-    
+
+        [Required]
         public int EmployeeID { get; set; }
+        
+        [Required]
         public string Title { get; set; }
         public Nullable<decimal> Salary { get; set; }
         public Nullable<System.DateTime> DateOfHiring { get; set; }
+        [Required]
         public string WorkingHours { get; set; }
         public Nullable<int> ManagerID { get; set; }
+        [Required]
         public string Name { get; set; }
         public string Password { get; set; }
     

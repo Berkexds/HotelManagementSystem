@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             userTitle = title;
             LoadCustomerData();
-
+            textBox1.TextChanged += textBox1_TextChanged;
             dgvCustomers.ColumnHeaderMouseClick += dgvCustomers_ColumnHeaderMouseClick;
         }
 
@@ -149,7 +149,31 @@ namespace WindowsFormsApp1
         }
 
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            var query = textBox1.Text.ToLower();
 
+            using (var db = new HotelManagementSystemEntities1())
+            {
+                var result = db.Customers.Where(cus =>
+                cus.Name.ToLower().Contains(query) ||
+                cus.EmailAddress.ToLower().Contains(query) ||
+                cus.Phone.ToString().Contains(query) ||
+                cus.Gender.ToLower().Contains(query) ||
+                cus.DateOfBirth.ToString().Contains(query))
+                .Select(x => new
+                {
+                            x.CustomerID,
+                            x.Name,
+                            x.EmailAddress,
+                            x.Phone,
+                            x.Gender,
+                            x.DateOfBirth
+                        }).ToList();
+
+                dgvCustomers.DataSource = result;
+            }
+        }
 
         private void LoadCustomerData()
         {
@@ -188,6 +212,8 @@ namespace WindowsFormsApp1
                         Text = "Delete",
                         UseColumnTextForButtonValue = true
                     });
+
+                    tableLayoutPanel1.Controls.Add(dgvCustomers, 0, 1);
                 }
             }
         }

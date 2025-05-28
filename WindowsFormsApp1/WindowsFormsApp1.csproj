@@ -57,6 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEntityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEntityForm.Designer.cs">
+      <DependentUpon>AddEntityForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

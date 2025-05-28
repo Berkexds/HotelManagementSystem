@@ -20,6 +20,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             userTitle = title;
             dgvReservation.CellContentClick += dgvReservation_CellContentClick;
+            textBox1.TextChanged += textBox1_TextChanged;
             LoadReservationData();
            
         }
@@ -63,10 +64,37 @@ namespace WindowsFormsApp1
                         Text = "Delete",
                         UseColumnTextForButtonValue = true
                     });
+
+                    tableLayoutPanel1.Controls.Add(dgvReservation, 0, 1);
                 }
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            var query = textBox1.Text.ToLower();
+
+            using (var db = new HotelManagementSystemEntities1())
+            {
+                var result = db.Reservations.Where(r =>
+                r.Customer.Name.ToLower().Contains(query) ||
+                r.ReservationStatus.ToLower().Contains(query) ||
+                r.NumberOfPeople.ToString().Contains(query) ||
+                r.Room.RoomID.ToString().ToLower().Contains(query) ||
+                r.Date.ToString().Contains(query))
+                .Select(r => new
+                {
+                    r.ReservationID,
+                    Customer = r.Customer.Name,
+                    Room = r.Room.RoomID,
+                    r.Date,
+                    r.ReservationStatus,
+                    r.NumberOfPeople
+                }).ToList();
+
+                dgvReservation.DataSource = result;
+            }
+        }
 
         private bool detailsFormOpen = false;
         private void dgvReservation_CellContentClick(object sender, DataGridViewCellEventArgs e)

@@ -21,8 +21,32 @@ namespace WindowsFormsApp1
             userTitle = title;
             dgvRoom.CellContentClick += dgvRoom_CellContentClick;
             LoadRoomData();
-
+            textBox1.TextChanged += textBox1_TextChanged;
             this.dgvRoom.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRoom_ColumnHeaderMouseClick);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            var query = textBox1.Text.ToLower();
+
+            using (var db = new HotelManagementSystemEntities1())
+            {
+                var result = db.Rooms.Where(room =>
+                room.RoomType.ToLower().Contains(query) ||
+                room.RoomStatus.ToLower().Contains(query) ||
+                room.PricePerNight.ToString().Contains(query) ||
+                room.Description.ToLower().Contains(query))
+                .Select(x => new
+                        {
+                            x.RoomID,
+                            x.RoomStatus,
+                            x.Description,
+                            x.PricePerNight,
+                            x.RoomType,
+                        }).ToList();
+
+                dgvRoom.DataSource = result;
+            }
         }
 
         private void dgvRoom_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -96,6 +120,7 @@ namespace WindowsFormsApp1
                         break;
 
                 }
+
             }
         }
 
@@ -136,6 +161,7 @@ namespace WindowsFormsApp1
                 }
 
                 dgvRoom.ReadOnly = true;
+                tableLayoutPanel1.Controls.Add(dgvRoom, 0, 1);
                 dgvRoom.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
         }
@@ -172,6 +198,12 @@ namespace WindowsFormsApp1
                     }
                 }
             }
+        }
+
+        private void addRoomButton_Click(object sender, EventArgs e)
+        {
+            AddEntityForm addRoomForm = new AddEntityForm(typeof(Room));
+            addRoomForm.ShowDialog();
         }
     }
 }
