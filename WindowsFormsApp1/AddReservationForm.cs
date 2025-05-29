@@ -61,14 +61,6 @@ namespace WindowsFormsApp1
                     MessageBox.Show("Girilen Room ID geçersiz. Böyle bir oda yok.", "Geçersiz Oda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                var room = db.Rooms.FirstOrDefault(r => r.RoomID == roomId);
-
-                bool roomIsAvailable = room.RoomStatus.Equals("Available");
-                if (!roomIsAvailable)
-                {
-                    MessageBox.Show("Oda rezervasyona müsait değil.", "Geçersiz Oda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
 
                 bool customerExists = db.Customers.Any(c => c.CustomerID == customerId);
                 if (!customerExists)
@@ -89,7 +81,6 @@ namespace WindowsFormsApp1
 
                 try
                 {
-                    room.RoomStatus = "Occupied";
                     db.Reservations.Add(newReservation);
                     db.SaveChanges();
                     MessageBox.Show("Rezervasyon başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
