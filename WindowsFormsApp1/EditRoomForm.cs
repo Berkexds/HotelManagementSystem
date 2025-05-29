@@ -35,6 +35,7 @@ namespace WindowsFormsApp1
                     nudPricePerNight.Value = room.PricePerNight ?? 0;
                     cbRoomType.Text = room.RoomType;
                 }
+                
             }
         }
 
@@ -50,6 +51,7 @@ namespace WindowsFormsApp1
                     room.Description = tbDescription.Text.Trim();
                     room.PricePerNight = nudPricePerNight.Value;
                     room.RoomType = cbRoomType.Text.Trim();
+
 
                     db.SaveChanges();
                     MessageBox.Show("Room updated successfully!");

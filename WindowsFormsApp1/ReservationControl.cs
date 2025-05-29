@@ -23,7 +23,7 @@ namespace WindowsFormsApp1
             dgvReservation.ColumnHeaderMouseClick += dgvReservation_ColumnHeaderMouseClick; ;
             textBox1.TextChanged += textBox1_TextChanged;
             LoadReservationData();
-           
+
         }
 
         private void dgvReservation_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

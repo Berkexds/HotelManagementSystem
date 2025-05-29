@@ -113,7 +113,7 @@ namespace WindowsFormsApp1
                     MessageBox.Show("Seçilen oda veritabanında bulunamadı.");
                     return;
                 }
-                else if (!room.RoomStatus.Equals("Available"))
+                else if (reservation.RoomID != room.RoomID && !room.RoomStatus.Equals("Available"))
                 {
                     MessageBox.Show("Oda kullanıma müsait değil");
                     return;
@@ -134,6 +134,27 @@ namespace WindowsFormsApp1
                 reservation.Date = dtDate.Value;
                 reservation.RoomID = selectedRoomId;
                 reservation.CustomerID = selectedCustomerId;
+
+                // Güncellemeleri yap
+                reservation.ReservationStatus = cbStatus.Text;
+                reservation.NumberOfPeople = (int)nudPeople.Value;
+                reservation.Date = dtDate.Value;
+                reservation.RoomID = selectedRoomId;
+                reservation.CustomerID = selectedCustomerId;
+
+                // Eğer DONE yapıldıysa ve başka aktif rezervasyon yoksa → Room'ı AVAILABLE yap
+                if (reservation.ReservationStatus.Equals("Done", StringComparison.OrdinalIgnoreCase))
+                {
+                    bool hasOtherReservations = db.Reservations
+                        .Any(r => r.RoomID == selectedRoomId &&
+                                  r.ReservationID != reservation.ReservationID &&
+                                  !r.ReservationStatus.Equals("Done", StringComparison.OrdinalIgnoreCase));
+
+                    if (!hasOtherReservations)
+                    {
+                        room.RoomStatus = "Available";
+                    }
+                }
 
 
                 try

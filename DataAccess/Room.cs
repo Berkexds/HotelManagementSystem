@@ -11,8 +11,7 @@ namespace DataAccess
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Room
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,15 +20,11 @@ namespace DataAccess
             this.Reservations = new HashSet<Reservation>();
             this.Employees = new HashSet<Employee>();
         }
-
-        [Required]
+    
         public int RoomID { get; set; }
-        [Required]
-        [RegularExpression("^(Available|Occupied|Maintenance)$", ErrorMessage = "Available, Occupied or Maintenance!")]
         public string RoomStatus { get; set; }
         public string Description { get; set; }
         public Nullable<decimal> PricePerNight { get; set; }
-        [Required]
         public string RoomType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

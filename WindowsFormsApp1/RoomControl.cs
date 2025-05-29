@@ -179,7 +179,7 @@ namespace WindowsFormsApp1
             {
                 var form = new EditRoomForm(roomId);
                 form.ShowDialog();
-                LoadRoomData(); // Refresh the table after editing
+                LoadRoomData(); 
             }
             else if (columnName == "Delete")
             {
@@ -191,9 +191,11 @@ namespace WindowsFormsApp1
                         var room = db.Rooms.Find(roomId);
                         if (room != null)
                         {
+                            var reservationsInvolved = db.Reservations.Where(r => r.RoomID == roomId);
+                            db.Reservations.RemoveRange(reservationsInvolved);
                             db.Rooms.Remove(room);
                             db.SaveChanges();
-                            LoadRoomData(); // refresh
+                            LoadRoomData(); 
                         }
                     }
                 }
