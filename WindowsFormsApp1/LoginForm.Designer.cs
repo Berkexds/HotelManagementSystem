@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
@@ -37,17 +38,20 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(254, 117);
+            this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(301, 120);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 16);
+            this.label1.Size = new System.Drawing.Size(54, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(307, 117);
+            this.txtName.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtName.Location = new System.Drawing.Point(375, 117);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 22);
             this.txtName.TabIndex = 1;
@@ -56,7 +60,8 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(307, 163);
+            this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtPassword.Location = new System.Drawing.Point(375, 154);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(100, 22);
             this.txtPassword.TabIndex = 2;
@@ -65,20 +70,25 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(317, 214);
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button1.Font = new System.Drawing.Font("Mongolian Baiti", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(354, 201);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(74, 28);
             this.button1.TabIndex = 3;
-            this.button1.Text = "btnLogin";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Text = "LOGIN";
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(231, 169);
+            this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Location = new System.Drawing.Point(271, 157);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 16);
+            this.label2.Size = new System.Drawing.Size(84, 16);
             this.label2.TabIndex = 4;
             this.label2.Text = "Password:";
             // 
@@ -86,12 +96,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label1);
+            this.DoubleBuffered = true;
             this.Name = "LoginForm";
             this.Text = "LoginForm";
             this.ResumeLayout(false);

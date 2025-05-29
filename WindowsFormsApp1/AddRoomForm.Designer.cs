@@ -47,15 +47,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(163, 82);
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(322, 79);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 16);
+            this.label1.Size = new System.Drawing.Size(64, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "RoomID:";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(229, 116);
+            this.textBox2.Location = new System.Drawing.Point(396, 113);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 3;
@@ -63,18 +65,22 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(145, 119);
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Location = new System.Drawing.Point(304, 116);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 16);
+            this.label2.Size = new System.Drawing.Size(88, 18);
             this.label2.TabIndex = 2;
             this.label2.Text = "Description:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(139, 154);
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label3.Location = new System.Drawing.Point(298, 151);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 16);
+            this.label3.Size = new System.Drawing.Size(94, 18);
             this.label3.TabIndex = 4;
             this.label3.Text = "RoomStatus:";
             // 
@@ -85,7 +91,7 @@
             "Available",
             "Occupied",
             "Maintenance"});
-            this.comboBox1.Location = new System.Drawing.Point(229, 151);
+            this.comboBox1.Location = new System.Drawing.Point(396, 148);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 5;
@@ -93,9 +99,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(144, 187);
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label4.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label4.Location = new System.Drawing.Point(303, 184);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 16);
+            this.label4.Size = new System.Drawing.Size(83, 18);
             this.label4.TabIndex = 6;
             this.label4.Text = "RoomType:";
             // 
@@ -106,7 +114,7 @@
             "Standard",
             "Suite",
             "Deluxe"});
-            this.comboBox2.Location = new System.Drawing.Point(229, 187);
+            this.comboBox2.Location = new System.Drawing.Point(396, 184);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
             this.comboBox2.TabIndex = 7;
@@ -114,24 +122,28 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(144, 190);
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label6.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label6.Location = new System.Drawing.Point(303, 187);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 16);
+            this.label6.Size = new System.Drawing.Size(83, 18);
             this.label6.TabIndex = 6;
             this.label6.Text = "RoomType:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(130, 223);
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label7.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label7.Location = new System.Drawing.Point(289, 220);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(93, 16);
+            this.label7.Size = new System.Drawing.Size(102, 18);
             this.label7.TabIndex = 8;
             this.label7.Text = "PricePerNight:";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(230, 223);
+            this.numericUpDown1.Location = new System.Drawing.Point(397, 220);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -143,7 +155,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(248, 286);
+            this.button1.Location = new System.Drawing.Point(365, 272);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(81, 38);
             this.button1.TabIndex = 11;
@@ -153,7 +165,7 @@
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(230, 76);
+            this.numericUpDown3.Location = new System.Drawing.Point(397, 73);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -167,6 +179,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.Screenshot_2025_05_25_2257111;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.numericUpDown3);

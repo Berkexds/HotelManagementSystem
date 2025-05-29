@@ -93,7 +93,6 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 22);
             this.txtName.TabIndex = 5;
-            
             // 
             // txtTitle
             // 
@@ -101,7 +100,6 @@
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(100, 22);
             this.txtTitle.TabIndex = 6;
-            
             // 
             // txtSalary
             // 
@@ -109,7 +107,6 @@
             this.txtSalary.Name = "txtSalary";
             this.txtSalary.Size = new System.Drawing.Size(100, 22);
             this.txtSalary.TabIndex = 7;
-            
             // 
             // dtpDateofHiring
             // 
@@ -117,7 +114,6 @@
             this.dtpDateofHiring.Name = "dtpDateofHiring";
             this.dtpDateofHiring.Size = new System.Drawing.Size(200, 22);
             this.dtpDateofHiring.TabIndex = 8;
-           
             // 
             // numWorkingHours
             // 
@@ -140,6 +136,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.Screenshot_2025_05_25_2257111;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.numWorkingHours);
@@ -154,7 +151,6 @@
             this.Controls.Add(this.label1);
             this.Name = "EditEmployeeForm";
             this.Text = "EditEmployeeForm";
-            
             ((System.ComponentModel.ISupportInitialize)(this.numWorkingHours)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

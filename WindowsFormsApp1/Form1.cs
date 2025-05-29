@@ -24,6 +24,23 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            loadPieChart();
+        }
+        private void ShowPanel(Panel panelToShow)
+        {
+            // Always hide the dashboard
+            panelHome.Visible = false;
+
+            // If a panel is passed (like Home), show it
+            if (panelToShow != null)
+            {
+                panelToShow.Visible = true;
+                panelToShow.BringToFront();
+            }
+        }
+
+        private void loadPieChart()
+        {
             using (var db = new HotelManagementSystemEntities1())
             {
                 // Total employee count
@@ -38,43 +55,43 @@ namespace WindowsFormsApp1
                 int availableRooms = db.Rooms.Count(r => r.RoomStatus == "Available"); // or whatever your availability flag is
                 labelRoomCount.Text = $"Available Rooms: {availableRooms}";
 
-                // Gender distribution chart
-                int maleCount = db.Customers.Count(c => c.Gender == "Male");
-                int femaleCount = db.Customers.Count(c => c.Gender == "Female");
-
                 chart1.Series.Clear();
-                chart1.Titles.Clear(); // In case it's loaded multiple times
-                chart1.Titles.Add("Gender Distribution");
-                
+                chart1.Titles.Clear();
+                chart1.ChartAreas.Clear();
+                chart1.Legends.Clear();
 
-                var series = new System.Windows.Forms.DataVisualization.Charting.Series
+                chart1.Titles.Add("Reservation Status Distribution");
+                chart1.ChartAreas.Add(new ChartArea("MainArea"));
+
+                Legend legend = new Legend("Legend1");
+                legend.Font = new Font("Segoe UI", 9);
+                chart1.Legends.Add(legend);
+
+                var series = new Series("Reservation Status")
                 {
-                    Name = "Gender",
-                    ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
-
-
+                    ChartType = SeriesChartType.Pie,
+                    ChartArea = "MainArea",
+                    IsValueShownAsLabel = true,
+                    Font = new Font("Segoe UI", 11, FontStyle.Bold),
+                    Legend = "Legend1" // bu satır varsa yukarıyla uyuşmalı
                 };
-               
 
-                series.IsValueShownAsLabel = true;
+                series["PieLabelStyle"] = "Outside";
+                series.Label = "#VALX: #PERCENT{P1}";
 
-                series.Points.AddXY($"Male: {maleCount}", maleCount);
-                series.Points.AddXY($"Female: {femaleCount}", femaleCount);
+                foreach (var group in db.Reservations
+                    .GroupBy(r => r.ReservationStatus)
+                    .Select(g => new { Status = g.Key, Count = g.Count() })
+                    .ToList())
+                {
+                    series.Points.AddXY(group.Status, group.Count);
+                }
+
+                chart1.BackColor = Color.Transparent;
                 chart1.Series.Add(series);
-                CustomizeBasedOnRole();
+                chart1.Width = 400;
+                chart1.Height = 300;
 
-            }
-        }
-        private void ShowPanel(Panel panelToShow)
-        {
-            // Always hide the dashboard
-            panelHome.Visible = false;
-
-            // If a panel is passed (like Home), show it
-            if (panelToShow != null)
-            {
-                panelToShow.Visible = true;
-                panelToShow.BringToFront();
             }
         }
 
@@ -91,20 +108,12 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnHome_Click(object sender, EventArgs e)
         {
-            panelContent.Controls.Clear();      // Remove any loaded control
+            panelContent.Controls.Clear();
+            panelHome.BackColor = Color.CornflowerBlue;// Remove any loaded control
             ShowPanel(panelHome);
+            loadPieChart();
         }
 
         private void btnCustomers_Click(object sender, EventArgs e)
