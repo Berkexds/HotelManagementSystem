@@ -20,9 +20,103 @@ namespace WindowsFormsApp1
             InitializeComponent();
             userTitle = title;
             dgvReservation.CellContentClick += dgvReservation_CellContentClick;
+            dgvReservation.ColumnHeaderMouseClick += dgvReservation_ColumnHeaderMouseClick; ;
             textBox1.TextChanged += textBox1_TextChanged;
             LoadReservationData();
            
+        }
+
+        private void dgvReservation_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            String columnName = dgvReservation.Columns[e.ColumnIndex].Name;
+
+
+            using (var db = new HotelManagementSystemEntities1())
+            {
+                switch (columnName)
+                {
+                    case "ReservationStatus":
+                        dgvReservation.DataSource = db.Reservations
+                        .OrderBy(r => r.ReservationStatus)
+                        .Select(r => new
+                        {
+                            r.ReservationID,
+                            Customer = r.Customer.Name,
+                            Room = r.Room.RoomID,
+                            r.Date,
+                            r.ReservationStatus,
+                            r.NumberOfPeople
+                        }).ToList();
+                        break;
+                    case "NumberOfPeople":
+                        dgvReservation.DataSource = db.Reservations
+                        .OrderBy(x => x.NumberOfPeople)
+                        .Select(r => new
+                        {
+                            r.ReservationID,
+                            Customer = r.Customer.Name,
+                            Room = r.Room.RoomID,
+                            r.Date,
+                            r.ReservationStatus,
+                            r.NumberOfPeople
+                        }).ToList();
+                        break;
+                    case "Date":
+                        dgvReservation.DataSource = db.Reservations
+                        .OrderBy(x => x.Date)
+                        .Select(r => new
+                        {
+                            r.ReservationID,
+                            Customer = r.Customer.Name,
+                            Room = r.Room.RoomID,
+                            r.Date,
+                            r.ReservationStatus,
+                            r.NumberOfPeople
+                        }).ToList();
+                        break;
+                    case "Room":
+                        dgvReservation.DataSource = db.Reservations
+                        .OrderBy(x => x.RoomID)
+                        .Select(r => new
+                        {
+                            r.ReservationID,
+                            Customer = r.Customer.Name,
+                            Room = r.Room.RoomID,
+                            r.Date,
+                            r.ReservationStatus,
+                            r.NumberOfPeople
+                        }).ToList();
+                        break;
+                    case "Customer":
+                        dgvReservation.DataSource = db.Reservations
+                        .OrderBy(x => x.CustomerID)
+                        .Select(r => new
+                        {
+                            r.ReservationID,
+                            Customer = r.Customer.Name,
+                            Room = r.Room.RoomID,
+                            r.Date,
+                            r.ReservationStatus,
+                            r.NumberOfPeople
+                        }).ToList();
+                        break;
+                    default:
+                        dgvReservation.DataSource = db.Reservations
+                        .OrderBy(x => x.ReservationID)
+                        .Select(r => new
+                        {
+                            r.ReservationID,
+                            Customer = r.Customer.Name,
+                            Room = r.Room.RoomID,
+                            r.Date,
+                            r.ReservationStatus,
+                            r.NumberOfPeople
+                        }).ToList();
+                        break;
+
+                }
+
+            }
         }
 
         private void LoadReservationData()
@@ -123,6 +217,7 @@ namespace WindowsFormsApp1
                     using (var db = new HotelManagementSystemEntities1())
                     {
                         var res = db.Reservations.Find(reservationId);
+                        res.Room.RoomStatus = "Available";
                         if (res != null)
                         {
                             db.Reservations.Remove(res);
