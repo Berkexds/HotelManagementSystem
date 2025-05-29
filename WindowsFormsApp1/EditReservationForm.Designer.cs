@@ -34,11 +34,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.cbStatus = new System.Windows.Forms.ComboBox();
-            this.cbRoom = new System.Windows.Forms.ComboBox();
-            this.cbCustomer = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dtDate = new System.Windows.Forms.DateTimePicker();
             this.nudPeople = new System.Windows.Forms.NumericUpDown();
+            this.cbCustomer = new System.Windows.Forms.ComboBox();
+            this.cbRoom = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudPeople)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,48 +92,12 @@
             // 
             this.cbStatus.FormattingEnabled = true;
             this.cbStatus.Items.AddRange(new object[] {
-            "Pending...",
-            "Confirmed",
-            "Cancelled",
-            "Checked-In",
-            "Checked-Out"});
+            "Active",
+            "Done"});
             this.cbStatus.Location = new System.Drawing.Point(283, 70);
             this.cbStatus.Name = "cbStatus";
             this.cbStatus.Size = new System.Drawing.Size(121, 24);
             this.cbStatus.TabIndex = 5;
-            // 
-            // cbRoom
-            // 
-            this.cbRoom.FormattingEnabled = true;
-            this.cbRoom.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"});
-            this.cbRoom.Location = new System.Drawing.Point(283, 192);
-            this.cbRoom.Name = "cbRoom";
-            this.cbRoom.Size = new System.Drawing.Size(121, 24);
-            this.cbRoom.TabIndex = 6;
-            // 
-            // cbCustomer
-            // 
-            this.cbCustomer.FormattingEnabled = true;
-            this.cbCustomer.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.cbCustomer.Location = new System.Drawing.Point(283, 227);
-            this.cbCustomer.Name = "cbCustomer";
-            this.cbCustomer.Size = new System.Drawing.Size(121, 24);
-            this.cbCustomer.TabIndex = 7;
             // 
             // label5
             // 
@@ -157,6 +121,40 @@
             this.nudPeople.Name = "nudPeople";
             this.nudPeople.Size = new System.Drawing.Size(120, 22);
             this.nudPeople.TabIndex = 10;
+            // 
+            // cbCustomer
+            // 
+            this.cbCustomer.FormattingEnabled = true;
+            this.cbCustomer.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.cbCustomer.Location = new System.Drawing.Point(283, 227);
+            this.cbCustomer.Name = "cbCustomer";
+            this.cbCustomer.Size = new System.Drawing.Size(121, 24);
+            this.cbCustomer.TabIndex = 7;
+            // 
+            // cbRoom
+            // 
+            this.cbRoom.FormattingEnabled = true;
+            this.cbRoom.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "102"});
+            this.cbRoom.Location = new System.Drawing.Point(283, 192);
+            this.cbRoom.Name = "cbRoom";
+            this.cbRoom.Size = new System.Drawing.Size(121, 24);
+            this.cbRoom.TabIndex = 6;
             // 
             // EditReservationForm
             // 
@@ -190,10 +188,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox cbStatus;
-        private System.Windows.Forms.ComboBox cbRoom;
-        private System.Windows.Forms.ComboBox cbCustomer;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtDate;
         private System.Windows.Forms.NumericUpDown nudPeople;
+        private System.Windows.Forms.ComboBox cbCustomer;
+        private System.Windows.Forms.ComboBox cbRoom;
     }
 }
