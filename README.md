@@ -29,7 +29,7 @@ A Windows Forms application for managing hotel operations including customer res
 -If the project references a .pfx signing key file that is missing or causes build errors:
 -Open WindowsFormsApp1.csproj and remove or comment out the lines referencing the .pfx file.
 
-4.Make sure SQL Server is running:
+4.Make sure SQL Server is running:(THERE IS SQL FILE FOR ALL THE ENTITIES)
 -Start SQL Server and confirm the HotelManagementSystem database is attached.
 -Ensure your Windows user has permissions to access the database (typically assigned the db_owner role).
 
