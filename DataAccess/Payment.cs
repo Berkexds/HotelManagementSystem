@@ -14,12 +14,6 @@ namespace DataAccess
     
     public partial class Payment
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Payment()
-        {
-            this.Reservations = new HashSet<Reservation>();
-        }
-    
         public int PaymentID { get; set; }
         public string PaymentMethod { get; set; }
         public string PaymentStatus { get; set; }
@@ -27,8 +21,6 @@ namespace DataAccess
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public Nullable<int> CustomerID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservation> Reservations { get; set; }
         public virtual Customer Customer { get; set; }
     }
 }

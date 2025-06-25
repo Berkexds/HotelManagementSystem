@@ -43,15 +43,12 @@ namespace WindowsFormsApp1
         {
             using (var db = new HotelManagementSystemEntities1())
             {
-                // Total employee count
                 int employeeCount = db.Employees.Count();
                 labelEmployeeCount.Text = $"Employees: {employeeCount}";
 
-                // Total customer count
                 int customerCount = db.Customers.Count();
                 labelCustomerCount.Text = $"Customers: {customerCount}";
 
-                // Available rooms
                 int availableRooms = db.Rooms.Count(r => r.RoomStatus == "Available"); // or whatever your availability flag is
                 labelRoomCount.Text = $"Available Rooms: {availableRooms}";
 
@@ -73,7 +70,7 @@ namespace WindowsFormsApp1
                     ChartArea = "MainArea",
                     IsValueShownAsLabel = true,
                     Font = new Font("Segoe UI", 11, FontStyle.Bold),
-                    Legend = "Legend1" // bu satır varsa yukarıyla uyuşmalı
+                    Legend = "Legend1" 
                 };
 
                 series["PieLabelStyle"] = "Outside";

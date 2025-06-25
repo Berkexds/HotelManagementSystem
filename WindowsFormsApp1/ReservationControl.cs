@@ -234,6 +234,11 @@ namespace WindowsFormsApp1
             AddReservationForm aRF = new AddReservationForm();
             aRF.ShowDialog();
         }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 

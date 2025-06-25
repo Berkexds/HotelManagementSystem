@@ -59,35 +59,5 @@ namespace WindowsFormsApp1.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap pic1 {
-            get {
-                object obj = ResourceManager.GetObject("pic1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_2025_05_25_225711 {
-            get {
-                object obj = ResourceManager.GetObject("Screenshot 2025-05-25 225711", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_2025_05_25_2257111 {
-            get {
-                object obj = ResourceManager.GetObject("Screenshot 2025-05-25 2257111", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

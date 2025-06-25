@@ -28,11 +28,10 @@ namespace DataAccess
         public Nullable<int> RoomID { get; set; }
         public Nullable<int> CustomerID { get; set; }
     
-        public virtual Feedback Feedback { get; set; }
-        public virtual Payment Payment { get; set; }
         public virtual Room Room { get; set; }
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
+        public virtual Feedback Feedback { get; set; }
     }
 }

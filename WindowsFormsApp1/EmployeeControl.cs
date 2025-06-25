@@ -223,7 +223,8 @@ namespace WindowsFormsApp1
 
         private void addEmployeeButton_Click(object sender, EventArgs e)
         {
-            
+            AddEmployeeForm addEmployeeForm = new AddEmployeeForm();
+            addEmployeeForm.ShowDialog();
         }
     }
 }

@@ -15,11 +15,9 @@ namespace DataAccess
     public partial class Feedback
     {
         public int ReservationID { get; set; }
-        public Nullable<System.DateTime> DateOfFeedback { get; set; }
-        public Nullable<bool> AnonymityStatus { get; set; }
-        public string ManagementResponse { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> Rating { get; set; }
-        public string Comments { get; set; }
+        public string Comment { get; set; }
     
         public virtual Reservation Reservation { get; set; }
     }

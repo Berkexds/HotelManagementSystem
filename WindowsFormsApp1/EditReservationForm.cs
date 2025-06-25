@@ -128,21 +128,7 @@ namespace WindowsFormsApp1
 
                 
 
-                // Güncellemeleri yap
                 reservation.ReservationStatus = cbStatus.Text;
-                reservation.NumberOfPeople = (int)nudPeople.Value;
-                reservation.Date = dtDate.Value;
-                reservation.RoomID = selectedRoomId;
-                reservation.CustomerID = selectedCustomerId;
-
-                // Güncellemeleri yap
-                reservation.ReservationStatus = cbStatus.Text;
-                reservation.NumberOfPeople = (int)nudPeople.Value;
-                reservation.Date = dtDate.Value;
-                reservation.RoomID = selectedRoomId;
-                reservation.CustomerID = selectedCustomerId;
-
-                // Eğer DONE yapıldıysa ve başka aktif rezervasyon yoksa → Room'ı AVAILABLE yap
                 if (reservation.ReservationStatus.Equals("Done", StringComparison.OrdinalIgnoreCase))
                 {
                     bool hasOtherReservations = db.Reservations
@@ -155,6 +141,15 @@ namespace WindowsFormsApp1
                         room.RoomStatus = "Available";
                     }
                 }
+                else
+                {
+                    room.RoomStatus = "Occupied";
+                }
+                reservation.NumberOfPeople = (int)nudPeople.Value;
+                reservation.Date = dtDate.Value;
+                reservation.RoomID = selectedRoomId;
+                reservation.CustomerID = selectedCustomerId;
+
 
 
                 try

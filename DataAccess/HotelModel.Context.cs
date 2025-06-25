@@ -25,11 +25,11 @@ namespace DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Feedback> Feedbacks { get; set; }
-        public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
     }
 }
