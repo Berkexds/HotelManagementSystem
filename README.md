@@ -6,7 +6,6 @@ A Windows Forms application for managing hotel operations including customer res
 
 - ✅ Add, edit, delete customers
 - ✅ Manage rooms and availability
-- ✅ Make and update reservations
 - ✅ Employee login and staff management
 - ✅ Database integration via SQL Server and Entity Framework
 
