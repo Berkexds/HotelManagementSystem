@@ -1,3 +1,23 @@
+## Database Connection Configuration
+
+To connect the application to your local SQL Server database, please update the connection strings in the `App.config` file inside the **WindowsFormsApp1** project.
+
+Below is the example connection string configuration used in this project:
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <connectionStrings>
+    <add name="HotelManagementSystemEntities"
+         connectionString="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost\MSSQLSERVER02;initial catalog=HotelManagementSystem;integrated security=True;trustservercertificate=True;MultipleActiveResultSets=True;App=EntityFramework&quot;"
+         providerName="System.Data.EntityClient" />
+    <add name="HotelManagementSystemEntities1"
+         connectionString="metadata=res://*/HotelModel.csdl|res://*/HotelModel.ssdl|res://*/HotelModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost\MSSQLSERVER02;initial catalog=HotelManagementSystem;integrated security=True;trustservercertificate=True;MultipleActiveResultSets=True;App=EntityFramework&quot;"
+         providerName="System.Data.EntityClient" />
+  </connectionStrings>
+</configuration>
+
+
 # Hotel Management System
 
 A Windows Forms application for managing hotel operations including customer reservations, room tracking, and employee management. Built using C# and Entity Framework.
