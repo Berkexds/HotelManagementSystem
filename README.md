@@ -18,12 +18,25 @@ A Windows Forms application for managing hotel operations including customer res
 
 ## How to Run
 
-1. Clone the repository:
-2. Open the `.sln` file in **Visual Studio**.
+1. Download and extract the zip file
+2. Open the '.sln' file in **Visual Studio**.
+3.Prepare the database connection:
+-Open the App.config file inside the WindowsFormsApp1 project.
+-Modify the connection string’s data source to match your SQL Server instance, for example:
+"data source=localhost\MSSQLSERVER02;"
+-Make sure it points to the SQL Server instance where the database is hosted (check in SQL Server Management Studio).
 
-3. Make sure SQL Server is running.
+-If the project references a .pfx signing key file that is missing or causes build errors:
+-Open WindowsFormsApp1.csproj and remove or comment out the lines referencing the .pfx file.
 
-4. Build and run the application.
+4.Make sure SQL Server is running:
+-Start SQL Server and confirm the HotelManagementSystem database is attached.
+-Ensure your Windows user has permissions to access the database (typically assigned the db_owner role).
+
+5.Build and run the application:
+-Build the solution in Visual Studio.
+-Run the application; it should connect to the database and work correctly.
+
 
 ## Authors
 
